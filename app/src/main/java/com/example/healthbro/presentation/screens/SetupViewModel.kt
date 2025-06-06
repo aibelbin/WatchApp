@@ -4,6 +4,12 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.State
 import androidx.lifecycle.ViewModel
 
+
+data class Wallet(
+    val name: String,
+    val amount: Int
+)
+
 class SetupViewModel : ViewModel() {
     private val priv_wallet_amt =  mutableStateOf(0)
     val wallet_amt: State<Int> =  priv_wallet_amt
@@ -13,7 +19,7 @@ class SetupViewModel : ViewModel() {
     }
 
     fun saveWallet(name: String){
-        val newWallet = Wallet( name = name, balance = wallet_amt.value)
+        val newWallet = Wallet( name = name, amount = wallet_amt.value)
     }
 
 }

@@ -57,6 +57,7 @@ dependencies {
 
     // Use to implement wear ongoing activities
     implementation("androidx.wear:wear-ongoing:1.0.0")
+    implementation("androidx.wear.compose:compose-foundation:1.4.1")
 
 
     // Add support for wearable specific inputs
@@ -74,6 +75,7 @@ dependencies {
 
     // Standard Compose dependencies (shared with mobile)
     implementation(platform("androidx.compose:compose-bom:2025.05.00"))
+    implementation("androidx.wear.compose:compose-foundation:1.2.1")
     implementation("androidx.activity:activity-compose:1.10.1")
 
 
@@ -94,6 +96,8 @@ dependencies {
     implementation(libs.wear.tooling.preview)
     implementation(libs.activity.compose)
     implementation(libs.core.splashscreen)
+    implementation(libs.play.services.wallet)
+    implementation(libs.navigation.compose.jvmstubs)
     androidTestImplementation(platform(libs.compose.bom))
     androidTestImplementation(libs.ui.test.junit4)
     debugImplementation(libs.ui.tooling)
