@@ -1,8 +1,14 @@
-package com.example.healthbro.presentation.screens
+package com.example.healthbro.presentation.Models
 
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.State
 import androidx.lifecycle.ViewModel
+
+
+data class Wallet(    //struct frm c
+    val name: String,
+    val amount: Int
+)
 
 class SetupViewModel : ViewModel() {
     private val priv_wallet_amt =  mutableStateOf(0)
@@ -13,7 +19,7 @@ class SetupViewModel : ViewModel() {
     }
 
     fun saveWallet(name: String){
-        val newWallet = Wallet( name = name, balance = wallet_amt.value)
+        val newWallet = Wallet( name = name, amount = wallet_amt.value)
     }
 
 }
