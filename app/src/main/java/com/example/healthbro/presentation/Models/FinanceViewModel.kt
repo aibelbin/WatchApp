@@ -1,4 +1,4 @@
-package com.example.healthbro.presentation.viewModels
+package com.example.healthbro.presentation.Models
 
 import androidx.lifecycle.ViewModel
 

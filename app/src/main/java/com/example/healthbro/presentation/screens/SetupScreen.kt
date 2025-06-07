@@ -1,7 +1,5 @@
 package com.example.healthbro.presentation.screens
 
-import android.annotation.SuppressLint
-import android.view.MotionEvent
 import androidx.compose.animation.core.animateIntAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.focusable
@@ -14,26 +12,20 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.wear.compose.material.Button
 import androidx.wear.compose.material.Text
-import androidx.wear.compose.material.Vignette
-import androidx.wear.compose.material.VignettePosition
 import androidx.wear.compose.material3.MaterialTheme
-import androidx.wear.compose.material3.TimeText
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.*
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.focus.focusRequester
-import androidx.compose.ui.hapticfeedback.HapticFeedback
-import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalHapticFeedback
-import androidx.core.view.InputDeviceCompat
 import androidx.wear.compose.foundation.ExperimentalWearFoundationApi
 
-import androidx.compose.ui.input.rotary.RotaryScrollEvent
 import androidx.compose.ui.input.rotary.onRotaryScrollEvent
 import androidx.compose.ui.unit.dp
 import androidx.wear.compose.material.Scaffold
+import com.example.healthbro.presentation.Models.SetupViewModel
 
 @OptIn(ExperimentalWearFoundationApi::class)
 @Composable
@@ -51,8 +43,8 @@ fun SetupScreen(navController: NavController) {
     )
 
     Scaffold(
-        timeText = { TimeText() },
-        vignette = { Vignette(vignettePosition = VignettePosition.TopAndBottom) }
+        //timeText = { TimeText() },
+        //vignette = { Vignette(vignettePosition = VignettePosition.TopAndBottom) }
     ) {
         Column(
             modifier = Modifier
@@ -72,14 +64,6 @@ fun SetupScreen(navController: NavController) {
                 style = MaterialTheme.typography.displayLarge
             )
 
-            Button(onClick = { viewModel.changeValue(100) }) {
-                Text("+100")
-            }
-
-            Button(onClick = { viewModel.changeValue(-100) }) {
-                Text("-100")
-            }
-
             TextField(
                 value = walletName,
                 onValueChange = { walletName = it },
@@ -91,11 +75,10 @@ fun SetupScreen(navController: NavController) {
             Button(
                 onClick = {
                     viewModel.saveWallet(walletName)
-                    navController.navigate("main")
                 },
                 enabled = walletName.isNotEmpty()
             ) {
-                Text("Create Wallet")
+                Text("Created")
             }
 
             Text(

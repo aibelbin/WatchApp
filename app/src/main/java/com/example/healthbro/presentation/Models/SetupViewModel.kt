@@ -1,11 +1,11 @@
-package com.example.healthbro.presentation.screens
+package com.example.healthbro.presentation.Models
 
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.State
 import androidx.lifecycle.ViewModel
 
 
-data class Wallet(
+data class Wallet(    //struct frm c
     val name: String,
     val amount: Int
 )
