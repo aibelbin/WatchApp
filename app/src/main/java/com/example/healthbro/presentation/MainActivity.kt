@@ -27,17 +27,11 @@ class MainActivity : ComponentActivity() {
 
                 NavHost(
                     navController = navController,
-                    startDestination = "SetupScreen"
+                    startDestination = "MainScreen"
                 ){
                     composable("SetupScreen") { SetupScreen(navController)  }
                     composable("MainScreen") { MainScreen(navController = navController) }
                 }
-
-                Scaffold (modifier = Modifier.fillMaxHeight()) {
-                    //MainScreen()
-                    SetupScreen(navController = navController)
-
-                    }
                 }
             }
         }
