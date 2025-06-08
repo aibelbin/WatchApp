@@ -51,6 +51,8 @@ dependencies {
     implementation("androidx.wear.compose:compose-navigation")
 
 
+
+
     // Add support for wearable specific inputs
     implementation("androidx.wear:wear-input:1.1.0")
     implementation("androidx.wear:wear-input-testing:1.1.0")

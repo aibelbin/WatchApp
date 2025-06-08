@@ -56,7 +56,9 @@ fun MainScreen(navController: NavController){
                      .width(130.dp),
                  onClick =
              {
-                 navController.navigate("SetupScreen")
+                 navController.navigate("SetupScreen"){
+                     //#
+                 }
              }) {
                  Text(
                      "Get Started"

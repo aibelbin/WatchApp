@@ -47,7 +47,6 @@ fun SetupScreen(navController: NavController) {
     )
 
     Scaffold(
-
         //timeText = { TimeText() },
         //vignette = { Vignette(vignettePosition = VignettePosition.TopAndBottom) }
     ) {
@@ -62,6 +61,7 @@ fun SetupScreen(navController: NavController) {
                    // haptic.perform(HapticFeedbackType.TextInputFocus)
                     true
                 },
+
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
@@ -93,6 +93,7 @@ fun SetupScreen(navController: NavController) {
                     .width(100.dp),
                 onClick = {
                     viewModel.saveWallet(walletName)
+
                 }
             ) {
                 Text("Create Wallet")
