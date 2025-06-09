@@ -24,6 +24,7 @@ import androidx.compose.ui.draw.scale
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalHapticFeedback
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.wear.compose.foundation.ExperimentalWearFoundationApi
 
 import androidx.compose.ui.input.rotary.onRotaryScrollEvent
@@ -58,7 +59,8 @@ fun SetupScreen(navController: NavController) {
                 .focusable()
                 .onRotaryScrollEvent { scrollEvent ->
                     viewModel.changeValue((scrollEvent.verticalScrollPixels / 10).toInt())
-                   // haptic.perform(HapticFeedbackType.TextInputFocus)
+                    haptic.performHapticFeedback(HapticFeedbackType.LongPress)
+
                     true
                 },
 
