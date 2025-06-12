@@ -22,4 +22,5 @@ class SetupViewModel : ViewModel() {
         val newWallet = Wallet( name = name, amount = wallet_amt.value)
     }
 
+
 }

@@ -29,6 +29,7 @@ import androidx.wear.compose.foundation.ExperimentalWearFoundationApi
 
 import androidx.compose.ui.input.rotary.onRotaryScrollEvent
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.window.isPopupLayout
 import androidx.wear.compose.material.Scaffold
 import com.example.healthbro.presentation.Models.SetupViewModel
 
@@ -39,8 +40,9 @@ fun SetupScreen(navController: NavController) {
     val viewModel: SetupViewModel = viewModel()
 
     val focusRequester = remember { FocusRequester() }
-    var walletName by remember { mutableStateOf("") }
+    val walletName = remember { "Wallet" }
     val haptic = LocalHapticFeedback.current
+    //var lastHapticTime by remember { mutableStateOf(0L) }
 
     val animatedAmount by animateIntAsState(
         targetValue = viewModel.wallet_amt.value,
@@ -58,15 +60,24 @@ fun SetupScreen(navController: NavController) {
                 .focusRequester(focusRequester)
                 .focusable()
                 .onRotaryScrollEvent { scrollEvent ->
+                    val now = System.currentTimeMillis()
                     viewModel.changeValue((scrollEvent.verticalScrollPixels / 10).toInt())
                     haptic.performHapticFeedback(HapticFeedbackType.LongPress)
-
                     true
                 },
 
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
+
+            Text(
+                text = "Set your amount",
+                style = MaterialTheme.typography.titleLarge
+
+            )
+
+            Spacer(modifier = Modifier.height(20.dp))
+
             Text(
                 text = "₹$animatedAmount",
                 style = MaterialTheme.typography.displayLarge,
@@ -74,31 +85,19 @@ fun SetupScreen(navController: NavController) {
             )
             Spacer(modifier = Modifier.height(20.dp))
 
-            TextField(
-                shape = RoundedCornerShape(50),
-                modifier = Modifier
-                    .height(50.dp)
-                    .width(150.dp)
-                    .alpha(0.5f),
-                value = walletName,
-                onValueChange = { walletName = it },
-                label = { Text("Wallet Name") }
-            )
-
-            Spacer(modifier = Modifier.height(15.dp))
-
-            Button(
-                enabled = walletName.isNotEmpty(),
-                shape = RoundedCornerShape(50), // Makes it oval (50% or high radius)
-                modifier = Modifier
-                    .height(20.dp)
-                    .width(100.dp),
-                onClick = {
-                    viewModel.saveWallet(walletName)
-
+            if (viewModel.wallet_amt.value != 0){ //fix this
+                Button(
+                    shape = RoundedCornerShape(50),
+                    modifier = Modifier
+                        .height(20.dp)
+                        .width(100.dp),
+                    onClick = {
+                        viewModel.saveWallet(walletName)
+                        navController.navigate("HomeScreen")
+                    }
+                ) {
+                    Text("Create Wallet")
                 }
-            ) {
-                Text("Create Wallet")
             }
 
 
