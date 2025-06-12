@@ -85,7 +85,7 @@ fun SetupScreen(navController: NavController) {
             )
             Spacer(modifier = Modifier.height(20.dp))
 
-            if (viewModel.wallet_amt.value != 0){
+            if (viewModel.wallet_amt.value != 0){ //fix this
                 Button(
                     shape = RoundedCornerShape(50),
                     modifier = Modifier
