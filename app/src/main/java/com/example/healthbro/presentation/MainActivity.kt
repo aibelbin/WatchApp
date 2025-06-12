@@ -21,6 +21,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.wear.compose.material.Scaffold
+import com.example.healthbro.presentation.screens.HomeScreen
 import com.example.healthbro.presentation.screens.MainScreen
 import com.example.healthbro.presentation.screens.SetupScreen
 import com.example.healthbro.presentation.theme.FinanceTrackerTheme
@@ -66,6 +67,18 @@ class MainActivity : ComponentActivity() {
                         }
                     ) {
                         SetupScreen(navController)
+                    }
+
+                    composable(
+                        route = "HomeScreen",
+                        exitTransition = {
+                            slideOutOfContainer(towards = AnimatedContentTransitionScope.SlideDirection.Left)
+                        },
+                        enterTransition = {
+                            slideIntoContainer(towards = AnimatedContentTransitionScope.SlideDirection.Right)
+                        }
+                    ) {
+                        HomeScreen(navController)
                     }
                 }
                 }
