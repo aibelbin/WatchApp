@@ -1,9 +1,11 @@
 package com.example.healthbro.presentation.screens
 
+import android.widget.Space
 import androidx.compose.animation.core.animateIntAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.focusable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -22,6 +24,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
@@ -32,47 +35,53 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.isPopupLayout
 import androidx.wear.compose.material.Scaffold
 import com.example.healthbro.presentation.Models.SetupViewModel
+import kotlinx.coroutines.delay
 
 @OptIn(ExperimentalWearFoundationApi::class)
 @Composable
 fun SetupScreen(navController: NavController) {
-
     val viewModel: SetupViewModel = viewModel()
 
     val focusRequester = remember { FocusRequester() }
     val walletName = remember { "Wallet" }
+    val interactionSource = remember { MutableInteractionSource() }
     val haptic = LocalHapticFeedback.current
-    //var lastHapticTime by remember { mutableStateOf(0L) }
 
     val animatedAmount by animateIntAsState(
         targetValue = viewModel.wallet_amt.value,
         animationSpec = tween(durationMillis = 100)
     )
 
-    Scaffold(
-        //timeText = { TimeText() },
-        //vignette = { Vignette(vignettePosition = VignettePosition.TopAndBottom) }
-    ) {
+    Scaffold {
         Column(
             modifier = Modifier
                 .fillMaxSize()
                 .background(Color.Black)
-                .focusRequester(focusRequester)
-                .focusable()
+
                 .onRotaryScrollEvent { scrollEvent ->
-                    val now = System.currentTimeMillis()
-                    viewModel.changeValue((scrollEvent.verticalScrollPixels / 10).toInt())
-                    haptic.performHapticFeedback(HapticFeedbackType.LongPress)
+                    println("Rotary detected: ${scrollEvent.verticalScrollPixels}")
+                    viewModel.changeValue((scrollEvent.verticalScrollPixels / 20).toInt())
+                    haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                     true
                 },
-
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
+            Spacer(modifier = Modifier
+                .size(1.dp)
+                .alpha(0f)
+                .focusRequester(focusRequester)
+                .focusable())
 
             Text(
                 text = "Set your amount",
-                style = MaterialTheme.typography.titleLarge
+                style = MaterialTheme.typography.titleLarge,
+                modifier = Modifier
+                    .focusRequester(focusRequester)
+                    .focusable()
+                    .onFocusChanged {
+                        println("Focus changed: isFocused=${it.isFocused}")
+                    }
 
             )
 
@@ -81,11 +90,12 @@ fun SetupScreen(navController: NavController) {
             Text(
                 text = "₹$animatedAmount",
                 style = MaterialTheme.typography.displayLarge,
-                modifier = Modifier.scale(1f + (viewModel.wallet_amt.value % 100) * 0.001f)
+                modifier = Modifier.scale(1f + (animatedAmount % 100) * 0.001f)
             )
+
             Spacer(modifier = Modifier.height(20.dp))
 
-            if (viewModel.wallet_amt.value != 0){ //fix this
+            if (animatedAmount != 0) {
                 Button(
                     shape = RoundedCornerShape(50),
                     modifier = Modifier
@@ -99,12 +109,15 @@ fun SetupScreen(navController: NavController) {
                     Text("Create Wallet")
                 }
             }
-
-
         }
     }
 
     LaunchedEffect(Unit) {
+        delay(300)
+        println("Requesting focus now")
         focusRequester.requestFocus()
     }
+
+
 }
+

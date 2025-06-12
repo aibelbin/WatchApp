@@ -11,15 +11,22 @@ data class Wallet(    //struct frm c
 )
 
 class SetupViewModel : ViewModel() {
-    private val priv_wallet_amt =  mutableStateOf(0)
-    val wallet_amt: State<Int> =  priv_wallet_amt
+    private val _wallet = mutableStateOf(Wallet(name = "Wallet", amount = 0))
+    val wallet: State<Wallet> = _wallet
+
+    val wallet_amt: State<Int> get() = mutableStateOf(_wallet.value.amount)
+
+
 
     fun changeValue(change : Int){
-        priv_wallet_amt.value = (priv_wallet_amt.value + change).coerceAtLeast(0)
+        val newAmount = (_wallet.value.amount + change).coerceAtLeast(0)
+        _wallet.value = _wallet.value.copy(amount = newAmount)
+
     }
 
     fun saveWallet(name: String){
-        val newWallet = Wallet( name = name, amount = wallet_amt.value)
+        _wallet.value = _wallet.value.copy(name = name)
+
     }
 
 
