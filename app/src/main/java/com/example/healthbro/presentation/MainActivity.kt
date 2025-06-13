@@ -25,7 +25,7 @@ import com.example.healthbro.presentation.screens.HomeScreen
 import com.example.healthbro.presentation.screens.MainScreen
 import com.example.healthbro.presentation.screens.SetupScreen
 import com.example.healthbro.presentation.theme.FinanceTrackerTheme
-//import com.example.healthbro.presentation.screens.EditWalletScreen
+import com.example.healthbro.presentation.screens.EditWalletScreen
 
 
 
@@ -57,17 +57,17 @@ class MainActivity : ComponentActivity() {
                         MainScreen(navController)
                     }
 
-//                    composable(
-//                        route = "EditWalletScreen",
-//                        exitTransition = {
-//                            slideOutOfContainer(towards = AnimatedContentTransitionScope.SlideDirection.Left)
-//                        },
-//                        enterTransition = {
-//                            slideIntoContainer(towards = AnimatedContentTransitionScope.SlideDirection.Right)
-//                        }
-//                    ) {
-//                        EditWalletScreen(navController)
-//                    }
+                    composable(
+                        route = "EditWalletScreen",
+                        exitTransition = {
+                            slideOutOfContainer(towards = AnimatedContentTransitionScope.SlideDirection.Left)
+                        },
+                        enterTransition = {
+                            slideIntoContainer(towards = AnimatedContentTransitionScope.SlideDirection.Right)
+                        }
+                    ) {
+                        EditWalletScreen(navController)
+                    }
 
 
                     composable(

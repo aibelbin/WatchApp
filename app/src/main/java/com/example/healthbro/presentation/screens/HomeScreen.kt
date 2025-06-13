@@ -61,7 +61,7 @@ fun HomeScreen(navController: NavController){
                 .width(120.dp),
             onClick =
                 {
-                    navController.navigate("#"){
+                    navController.navigate("EditWalletScreen"){
                         //#
                     }
                 }) {
