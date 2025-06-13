@@ -99,8 +99,8 @@ fun SetupScreen(navController: NavController) {
                 Button(
                     shape = RoundedCornerShape(50),
                     modifier = Modifier
-                        .height(20.dp)
-                        .width(100.dp),
+                        .height(35.dp)
+                        .width(120.dp),
                     onClick = {
                         viewModel.saveWallet(walletName)
                         navController.navigate("HomeScreen")

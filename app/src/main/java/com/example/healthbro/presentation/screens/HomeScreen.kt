@@ -57,16 +57,16 @@ fun HomeScreen(navController: NavController){
         Button(
             shape = RoundedCornerShape(50),
             modifier = Modifier
-                .height(35.dp)
-                .width(130.dp),
+                .height(30.dp)
+                .width(120.dp),
             onClick =
                 {
-                    navController.navigate("MainScreen"){
+                    navController.navigate("#"){
                         //#
                     }
                 }) {
             Text(
-                "Change Wallet Amount"
+                "Edit Amount"
             )
         }
 
