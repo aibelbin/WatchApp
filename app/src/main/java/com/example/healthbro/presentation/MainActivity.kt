@@ -5,6 +5,7 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.AnimatedContentTransitionScope
 import androidx.compose.animation.ExperimentalAnimationApi
@@ -16,20 +17,24 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.wear.compose.material.Scaffold
+import com.example.healthbro.presentation.Models.SetupViewModel
 import com.example.healthbro.presentation.screens.HomeScreen
 import com.example.healthbro.presentation.screens.MainScreen
 import com.example.healthbro.presentation.screens.SetupScreen
 import com.example.healthbro.presentation.theme.FinanceTrackerTheme
-import com.example.healthbro.presentation.screens.EditWalletScreen
+
 
 
 
 class MainActivity : ComponentActivity() {
+
+    val viewModel: SetupViewModel by viewModels()
     @OptIn(ExperimentalAnimationApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,19 +63,6 @@ class MainActivity : ComponentActivity() {
                     }
 
                     composable(
-                        route = "EditWalletScreen",
-                        exitTransition = {
-                            slideOutOfContainer(towards = AnimatedContentTransitionScope.SlideDirection.Left)
-                        },
-                        enterTransition = {
-                            slideIntoContainer(towards = AnimatedContentTransitionScope.SlideDirection.Right)
-                        }
-                    ) {
-                        EditWalletScreen(navController)
-                    }
-
-
-                    composable(
                         route = "SetupScreen",
                         enterTransition = {
                             slideIntoContainer(towards = AnimatedContentTransitionScope.SlideDirection.Left)
@@ -79,7 +71,7 @@ class MainActivity : ComponentActivity() {
                             slideOutOfContainer(towards = AnimatedContentTransitionScope.SlideDirection.Right)  
                         }
                     ) {
-                        SetupScreen(navController)
+                        SetupScreen(navController , viewModel = viewModel)
                     }
 
                     composable(
@@ -91,7 +83,7 @@ class MainActivity : ComponentActivity() {
                             slideIntoContainer(towards = AnimatedContentTransitionScope.SlideDirection.Right)
                         }
                     ) {
-                        HomeScreen(navController)
+                        HomeScreen(navController, viewModel = viewModel)
                     }
                 }
                 }

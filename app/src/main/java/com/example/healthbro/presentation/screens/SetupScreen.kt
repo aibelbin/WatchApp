@@ -35,8 +35,8 @@ import kotlinx.coroutines.delay
 
 @OptIn(ExperimentalWearFoundationApi::class)
 @Composable
-fun SetupScreen(navController: NavController) {
-    val viewModel: SetupViewModel = viewModel()
+fun SetupScreen(navController: NavController, viewModel: SetupViewModel) {
+//    val viewModel: SetupViewModel = viewModel()
 
     val focusRequester = remember { FocusRequester() }
     val walletName = remember { "Wallet" }
@@ -54,7 +54,6 @@ fun SetupScreen(navController: NavController) {
             modifier = Modifier
                 .fillMaxSize()
                 .background(Color.Black)
-
                 .onRotaryScrollEvent { scrollEvent ->
                     println("Rotary detected: ${scrollEvent.verticalScrollPixels}")
 //                    counter += (scrollEvent.verticalScrollPixels / 20).toInt()
@@ -80,7 +79,6 @@ fun SetupScreen(navController: NavController) {
                     .onFocusChanged {
                         println("Focus changed: isFocused=${it.isFocused}")
                     }
-
             )
 
             Spacer(modifier = Modifier.height(20.dp))
@@ -115,7 +113,5 @@ fun SetupScreen(navController: NavController) {
         println("Requesting focus now")
         focusRequester.requestFocus()
     }
-
-
 }
 

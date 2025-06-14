@@ -32,9 +32,9 @@ import com.example.healthbro.presentation.Models.SetupViewModel
 
 
 @Composable
-fun HomeScreen(navController: NavController){
+fun HomeScreen(navController: NavController, viewModel: SetupViewModel){
 
-    val viewModel: SetupViewModel = viewModel()
+//    val viewModel: SetupViewModel = viewModel()
     val display_Wal_Amt = viewModel.walletAmount
 
 
