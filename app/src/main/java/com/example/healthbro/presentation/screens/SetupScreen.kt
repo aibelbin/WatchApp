@@ -1,6 +1,5 @@
 package com.example.healthbro.presentation.screens
 
-import android.widget.Space
 import androidx.compose.animation.core.animateIntAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
@@ -18,8 +17,6 @@ import androidx.wear.compose.material.Text
 import androidx.wear.compose.material3.MaterialTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.TextField
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.*
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.scale
@@ -32,7 +29,6 @@ import androidx.wear.compose.foundation.ExperimentalWearFoundationApi
 
 import androidx.compose.ui.input.rotary.onRotaryScrollEvent
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.window.isPopupLayout
 import androidx.wear.compose.material.Scaffold
 import com.example.healthbro.presentation.Models.SetupViewModel
 import kotlinx.coroutines.delay
@@ -48,9 +44,10 @@ fun SetupScreen(navController: NavController) {
     val haptic = LocalHapticFeedback.current
 
     val animatedAmount by animateIntAsState(
-        targetValue = viewModel.wallet_amt.value,
+        targetValue = viewModel.walletAmount,
         animationSpec = tween(durationMillis = 100)
     )
+    //var counter by remember { mutableStateOf(0) }
 
     Scaffold {
         Column(
@@ -60,6 +57,7 @@ fun SetupScreen(navController: NavController) {
 
                 .onRotaryScrollEvent { scrollEvent ->
                     println("Rotary detected: ${scrollEvent.verticalScrollPixels}")
+//                    counter += (scrollEvent.verticalScrollPixels / 20).toInt()
                     viewModel.changeValue((scrollEvent.verticalScrollPixels / 20).toInt())
                     haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                     true
@@ -102,7 +100,7 @@ fun SetupScreen(navController: NavController) {
                         .height(35.dp)
                         .width(120.dp),
                     onClick = {
-                        viewModel.saveWallet(walletName)
+                        viewModel.saveAmount(viewModel.walletAmount)
                         navController.navigate("HomeScreen")
                     }
                 ) {

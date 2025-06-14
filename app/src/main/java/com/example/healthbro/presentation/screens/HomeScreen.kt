@@ -30,11 +30,12 @@ import com.example.healthbro.presentation.Models.SetupViewModel
 
 
 
+
 @Composable
 fun HomeScreen(navController: NavController){
 
     val viewModel: SetupViewModel = viewModel()
-    val display_Wal_Amt = viewModel.wallet_amt.value
+    val display_Wal_Amt = viewModel.walletAmount
 
 
     Scaffold(
@@ -49,7 +50,7 @@ fun HomeScreen(navController: NavController){
             Text(
                 text = "₹$display_Wal_Amt",
                 style = MaterialTheme.typography.displayLarge,
-                modifier = Modifier.scale(1f + (viewModel.wallet_amt.value % 100) * 0.001f)
+                modifier = Modifier.scale(1f + (viewModel.walletAmount % 100) * 0.001f)
             )
 
             Spacer(modifier = Modifier.height(30.dp))
