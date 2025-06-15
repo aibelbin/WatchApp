@@ -33,12 +33,21 @@ import androidx.compose.ui.unit.dp
 import androidx.wear.compose.material.Scaffold
 import com.example.healthbro.presentation.Models.SetupViewModel
 import com.example.healthbro.presentation.Models.SetupViewModelFactory
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalWearFoundationApi::class)
 @Composable
-fun SetupScreen(navController: NavController, viewModel: SetupViewModel) {
-//    val viewModel: SetupViewModel = viewModel()
+fun SetupScreen(
+    onSetupComplete: () -> Unit,
+    viewModel: SetupViewModel,
+    navController: NavController
+) {
+
+
+
 
     val focusRequester = remember { FocusRequester() }
     val walletName = remember { "Wallet" }
@@ -105,6 +114,11 @@ fun SetupScreen(navController: NavController, viewModel: SetupViewModel) {
                         .height(35.dp)
                         .width(120.dp),
                     onClick = {
+
+                        CoroutineScope(Dispatchers.Main).launch {
+                            DataStore.markFirstRun(context)
+                        }
+                        onSetupComplete()
                         viewModel.saveAmount(viewModel.walletAmount)
                         navController.navigate("HomeScreen")
                     }
