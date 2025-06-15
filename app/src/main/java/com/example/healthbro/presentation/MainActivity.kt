@@ -59,7 +59,7 @@ class MainActivity : ComponentActivity() {
                             slideIntoContainer(towards = AnimatedContentTransitionScope.SlideDirection.Right)
                         }
                     ) {
-                        MainScreen(navController)
+                        MainScreen(navController, viewModel = viewModel)
                     }
 
                     composable(

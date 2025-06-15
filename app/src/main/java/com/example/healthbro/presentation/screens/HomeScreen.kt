@@ -62,7 +62,7 @@ fun HomeScreen(navController: NavController, viewModel: SetupViewModel){
                 .width(120.dp),
             onClick =
                 {
-                    navController.navigate("EditWalletScreen"){
+                    navController.navigate("SetupScreen"){
                         //#
                     }
                 }) {

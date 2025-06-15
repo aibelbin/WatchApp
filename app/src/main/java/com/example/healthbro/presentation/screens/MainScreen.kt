@@ -24,9 +24,10 @@ import androidx.wear.compose.material.Text
 import androidx.wear.compose.material.TimeText
 import androidx.wear.compose.material.Vignette
 import androidx.wear.compose.material3.MaterialTheme
+import com.example.healthbro.presentation.Models.SetupViewModel
 
 @Composable
-fun MainScreen(navController: NavController){
+fun MainScreen(navController: NavController, viewModel: SetupViewModel){
     Scaffold(
         timeText = { TimeText() },
         //vignette = { Vignette(vignettePosition = VignettePosition.TopAndBottom) }
