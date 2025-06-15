@@ -50,6 +50,8 @@ dependencies {
     implementation("androidx.wear.compose:compose-material3")
     implementation("androidx.wear.compose:compose-navigation")
 
+    implementation("androidx.datastore:datastore-preferences:1.1.7")
+
 
 
 

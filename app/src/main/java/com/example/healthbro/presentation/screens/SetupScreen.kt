@@ -28,9 +28,11 @@ import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.wear.compose.foundation.ExperimentalWearFoundationApi
 
 import androidx.compose.ui.input.rotary.onRotaryScrollEvent
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.wear.compose.material.Scaffold
 import com.example.healthbro.presentation.Models.SetupViewModel
+import com.example.healthbro.presentation.Models.SetupViewModelFactory
 import kotlinx.coroutines.delay
 
 @OptIn(ExperimentalWearFoundationApi::class)
@@ -48,6 +50,11 @@ fun SetupScreen(navController: NavController, viewModel: SetupViewModel) {
         animationSpec = tween(durationMillis = 100)
     )
     //var counter by remember { mutableStateOf(0) }
+
+    val context = LocalContext.current
+    val viewModel: SetupViewModel = viewModel(
+        factory = SetupViewModelFactory(context)
+    )
 
     Scaffold {
         Column(

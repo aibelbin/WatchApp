@@ -28,6 +28,8 @@ import com.example.healthbro.presentation.screens.HomeScreen
 import com.example.healthbro.presentation.screens.MainScreen
 import com.example.healthbro.presentation.screens.SetupScreen
 import com.example.healthbro.presentation.theme.FinanceTrackerTheme
+import com.example.healthbro.presentation.Models.SetupViewModelFactory
+import androidx.lifecycle.ViewModelProvider
 
 
 
@@ -40,6 +42,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         window.setWindowAnimations(0)  // Disable ALL system window animations
         //window.setBackgroundDrawable(ColorDrawable(Color.Transparent))
+        val viewModel = ViewModelProvider(this, SetupViewModelFactory(this)).get(SetupViewModel::class.java)
         setContent {
             FinanceTrackerTheme {
                 val navController = rememberNavController()
@@ -59,7 +62,7 @@ class MainActivity : ComponentActivity() {
                             slideIntoContainer(towards = AnimatedContentTransitionScope.SlideDirection.Right)
                         }
                     ) {
-                        MainScreen(navController, viewModel = viewModel)
+                        MainScreen(navController)
                     }
 
                     composable(
