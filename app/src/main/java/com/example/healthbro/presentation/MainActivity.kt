@@ -35,9 +35,7 @@ import com.example.healthbro.presentation.screens.MainScreen
 import com.example.healthbro.presentation.screens.SetupScreen
 import com.example.healthbro.presentation.theme.FinanceTrackerTheme
 import com.example.healthbro.presentation.Models.SetupViewModelFactory
-import androidx.lifecycle.ViewModelProvider
-import kotlinx.coroutines.coroutineScope
-import kotlin.coroutines.coroutineContext
+import com.example.healthbro.presentation.screens.setTransactionType
 
 
 class MainActivity : ComponentActivity() {
@@ -114,6 +112,17 @@ class MainActivity : ComponentActivity() {
                         }
                     ) {
                         HomeScreen(navController, viewModel = viewModel)
+                    }
+                    composable(
+                        route = "setTransactionType",
+                        exitTransition = {
+                            slideOutOfContainer(towards = AnimatedContentTransitionScope.SlideDirection.Left)
+                        },
+                        enterTransition = {
+                            slideIntoContainer(towards = AnimatedContentTransitionScope.SlideDirection.Right)
+                        }
+                    ) {
+                        setTransactionType(navController)
                     }
                 }
                 }

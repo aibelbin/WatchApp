@@ -1,5 +1,7 @@
 package com.example.healthbro.presentation.screens
 
+
+import com.example.healthbro.presentation.theme.Text
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -12,13 +14,11 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.wear.compose.material.Button
 import androidx.wear.compose.material.Scaffold
@@ -26,20 +26,13 @@ import androidx.wear.compose.material.Text
 import androidx.wear.compose.material.TimeText
 import androidx.wear.compose.material.Vignette
 import androidx.wear.compose.material3.MaterialTheme
-import com.example.healthbro.presentation.Models.SetupViewModel
-
-
 
 
 @Composable
-fun HomeScreen(navController: NavController, viewModel: SetupViewModel) {
-
-//    val viewModel: SetupViewModel = viewModel()
-    val display_Wal_Amt = viewModel.walletAmount
-
-
+fun setTransactionType(navController: NavController) {
     Scaffold(
-        //nothing for now
+        timeText = { TimeText() },
+        //vignette = { Vignette(vignettePosition = VignettePosition.TopAndBottom) }
     ) {
         Column(
             modifier = Modifier
@@ -49,44 +42,57 @@ fun HomeScreen(navController: NavController, viewModel: SetupViewModel) {
             verticalArrangement = Arrangement.Center
         ) {
             Text(
-                text = "₹$display_Wal_Amt",
-                style = MaterialTheme.typography.displayLarge,
-                modifier = Modifier.scale(1f + (viewModel.walletAmount % 100) * 0.001f)
+                text = "Set Type",
+                style = MaterialTheme.typography.titleLarge.copy(
+                    textAlign = TextAlign.Center
+                ),
+                modifier = Modifier.fillMaxWidth()
             )
+
+
 
             Spacer(modifier = Modifier.height(30.dp))
 
             Button(
                 shape = RoundedCornerShape(50),
                 modifier = Modifier
-                    .height(30.dp)
-                    .width(120.dp),
+                    .height(35.dp)
+                    .width(130.dp),
                 onClick =
                     {
-                        navController.navigate("SetupScreen") {
-                            //#
-                        }
+
                     }) {
-                Text(
-                    "Edit Amount"
+                androidx.wear.compose.material.Text(
+                    "Petrol"
                 )
 
                 Button(
                     shape = RoundedCornerShape(50),
                     modifier = Modifier
-                        .height(30.dp)
-                        .width(120.dp),
+                        .height(35.dp)
+                        .width(130.dp),
                     onClick =
                         {
-                            navController.navigate("setTransactionType") {
-
-                            }
+                                //#
                         }) {
-                    Text(
-                        "Add Transaction"
+                    androidx.wear.compose.material.Text(
+                        "Food"
                     )
-                }
 
+                    Button(
+                        shape = RoundedCornerShape(50),
+                        modifier = Modifier
+                            .height(35.dp)
+                            .width(130.dp),
+                        onClick =
+                            {
+                              //  #
+                            }) {
+                        androidx.wear.compose.material.Text(
+                            "Miss"
+                        )
+                    }
+                }
             }
         }
     }
