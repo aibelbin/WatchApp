@@ -4,7 +4,6 @@ import android.content.Context
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 import java.util.Date
@@ -17,7 +16,7 @@ enum class TransactionType{
 
 data class Transaction(
     val id: String = UUID.randomUUID().toString(),
-    val type: TransactionType,
+    val type: TransactionType?,
     val amount: Double,
     val date: Date = Date(),
 )
@@ -41,7 +40,7 @@ class TransactionViewMode(context: Context) : ViewModel() {
         _transactions.value = selectedTransactions
     }
 
-    fun addTransaction(selectedType: TransactionType, amount: Double) {
+    fun addTransaction(selectedType: TransactionType?, amount: Double) {
         val newTransaction = Transaction(type = selectedType, amount = amount, date = Date())
         _transactions.value += newTransaction
         _walletBalance.value -= amount
