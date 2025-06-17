@@ -122,7 +122,7 @@ class MainActivity : ComponentActivity() {
                             slideIntoContainer(towards = AnimatedContentTransitionScope.SlideDirection.Right)
                         }
                     ) {
-                        setTransactionType(navController)
+                        setTransactionType(navController, context)
                     }
                 }
                 }

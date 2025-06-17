@@ -54,13 +54,13 @@ fun HomeScreen(navController: NavController, viewModel: SetupViewModel) {
                 modifier = Modifier.scale(1f + (viewModel.walletAmount % 100) * 0.001f)
             )
 
-            Spacer(modifier = Modifier.height(30.dp))
+            Spacer(modifier = Modifier.height(18.dp))
 
             Button(
                 shape = RoundedCornerShape(50),
                 modifier = Modifier
                     .height(30.dp)
-                    .width(120.dp),
+                    .width(135.dp),
                 onClick =
                     {
                         navController.navigate("SetupScreen") {
@@ -70,12 +70,13 @@ fun HomeScreen(navController: NavController, viewModel: SetupViewModel) {
                 Text(
                     "Edit Amount"
                 )
-
+            }
+            Spacer(modifier = Modifier.height(5.dp))
                 Button(
                     shape = RoundedCornerShape(50),
                     modifier = Modifier
                         .height(30.dp)
-                        .width(120.dp),
+                        .width(135.dp),
                     onClick =
                         {
                             navController.navigate("setTransactionType") {
@@ -90,4 +91,3 @@ fun HomeScreen(navController: NavController, viewModel: SetupViewModel) {
             }
         }
     }
-}

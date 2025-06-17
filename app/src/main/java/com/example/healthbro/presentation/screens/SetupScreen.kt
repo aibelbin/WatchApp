@@ -87,19 +87,6 @@ fun SetupScreen(
                 .focusable())
 
             Text(
-                text = "Set your amount",
-                style = MaterialTheme.typography.titleLarge,
-                modifier = Modifier
-                    .focusRequester(focusRequester)
-                    .focusable()
-                    .onFocusChanged {
-                        println("Focus changed: isFocused=${it.isFocused}")
-                    }
-            )
-
-            Spacer(modifier = Modifier.height(20.dp))
-
-            Text(
                 text = "₹$animatedAmount",
                 style = MaterialTheme.typography.displayLarge,
                 modifier = Modifier.scale(1f + (animatedAmount % 100) * 0.001f)
