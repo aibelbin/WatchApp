@@ -87,6 +87,19 @@ fun HomeScreen(navController: NavController, viewModel: SetupViewModel) {
                         "Add Transaction"
                     )
                 }
+            Button(
+                shape = RoundedCornerShape(50),
+                modifier = Modifier
+                    .height(30.dp)
+                    .width(135.dp),
+                onClick =
+                    {
+                        navController.navigate("TransactionHistory")
+                    }) {
+                Text(
+                    "View History"
+                )
+            }
 
             }
         }

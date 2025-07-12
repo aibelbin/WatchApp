@@ -53,7 +53,7 @@ dependencies {
 
     implementation("androidx.datastore:datastore-preferences:1.1.7")
 
-
+    implementation("androidx.recyclerview:recyclerview:1.3.2")
 
 
     // Add support for wearable specific inputs

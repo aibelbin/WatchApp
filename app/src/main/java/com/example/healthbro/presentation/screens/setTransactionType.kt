@@ -61,6 +61,7 @@ fun setTransactionType(navController: NavController, context : Context) {
                 onClick =
                     {
                         viewModel.selectTransactionType(TransactionType.PETROL)
+                        navController.navigate("SetTransactionAmount")
                     }) {
                 androidx.wear.compose.material.Text(
                     "Petrol"
@@ -78,6 +79,7 @@ fun setTransactionType(navController: NavController, context : Context) {
                     onClick =
                         {
                             viewModel.selectTransactionType(TransactionType.FOOD)
+                            navController.navigate("SetTransactionAmount")
                         }) {
                     androidx.wear.compose.material.Text(
                         "Food"
@@ -95,6 +97,7 @@ fun setTransactionType(navController: NavController, context : Context) {
                         onClick =
                             {
                                 viewModel.selectTransactionType(TransactionType.MISS)
+                                navController.navigate("SetTransactionAmount")
                             }) {
                         androidx.wear.compose.material.Text(
                             "Miss"

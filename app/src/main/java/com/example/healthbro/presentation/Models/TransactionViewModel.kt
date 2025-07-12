@@ -34,15 +34,31 @@ class TransactionViewMode(context: Context) : ViewModel() {
     private val _walletBalance = mutableStateOf(0.0)
     val walletBalance: Double get() = _walletBalance.value
 
+    init {
+        // Load existing transactions and wallet balance
+        viewModelScope.launch {
+            DataStore.getTransactions(appContext).collect { loadedTransactions ->
+                _transactions.value = loadedTransactions
+            }
+        }
+        
+        viewModelScope.launch {
+            DataStore.getWalletAmount(appContext).collect { balance ->
+                _walletBalance.value = balance.toDouble()
+            }
+        }
+    }
+
 
     fun selectTransactionType(type: TransactionType){
-        val selectedTransactions = _transactions.value.filter { it.type == type }
-        _transactions.value = selectedTransactions
+        _selectedType.value = type
     }
 
     fun addTransaction(selectedType: TransactionType?, amount: Double) {
         val newTransaction = Transaction(type = selectedType, amount = amount, date = Date())
         _transactions.value += newTransaction
+        
+        // Update wallet balance (subtract the transaction amount)
         _walletBalance.value -= amount
 
         viewModelScope.launch {

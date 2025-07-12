@@ -51,4 +51,21 @@ object DataStore {
             preferences[TRANSACTIONS_KEY] = json
         }
     }
+
+    fun getTransactions(context: Context): Flow<List<Transaction>> {
+        return context.dataStore.data
+            .map { preferences ->
+                val json = preferences[TRANSACTIONS_KEY] ?: ""
+                if (json.isNotEmpty()) {
+                    try {
+                        val transactionArray = gson.fromJson(json, Array<Transaction>::class.java)
+                        transactionArray.toList()
+                    } catch (e: Exception) {
+                        emptyList()
+                    }
+                } else {
+                    emptyList()
+                }
+            }
+    }
 }

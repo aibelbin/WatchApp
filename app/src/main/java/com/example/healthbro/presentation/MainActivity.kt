@@ -36,6 +36,8 @@ import com.example.healthbro.presentation.screens.SetupScreen
 import com.example.healthbro.presentation.theme.FinanceTrackerTheme
 import com.example.healthbro.presentation.Models.SetupViewModelFactory
 import com.example.healthbro.presentation.screens.setTransactionType
+import com.example.healthbro.presentation.screens.SetTransactionAmount
+import com.example.healthbro.presentation.screens.TransactionHistory
 
 
 class MainActivity : ComponentActivity() {
@@ -123,6 +125,30 @@ class MainActivity : ComponentActivity() {
                         }
                     ) {
                         setTransactionType(navController, context)
+                    }
+                    
+                    composable(
+                        route = "SetTransactionAmount",
+                        exitTransition = {
+                            slideOutOfContainer(towards = AnimatedContentTransitionScope.SlideDirection.Left)
+                        },
+                        enterTransition = {
+                            slideIntoContainer(towards = AnimatedContentTransitionScope.SlideDirection.Right)
+                        }
+                    ) {
+                        SetTransactionAmount(navController)
+                    }
+                    
+                    composable(
+                        route = "TransactionHistory",
+                        exitTransition = {
+                            slideOutOfContainer(towards = AnimatedContentTransitionScope.SlideDirection.Left)
+                        },
+                        enterTransition = {
+                            slideIntoContainer(towards = AnimatedContentTransitionScope.SlideDirection.Right)
+                        }
+                    ) {
+                        TransactionHistory(navController)
                     }
                 }
                 }
